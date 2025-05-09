@@ -34,6 +34,23 @@ SUT Software Engineering assignment 05.
 ![image](https://github.com/user-attachments/assets/19fc89c0-e765-4964-b4b4-f95f77e57b1c)
 
 
+همچنین اگر وجود ArrayList در کد این تابع اجباری نباشد می توانیم به صورت سریع تر و بهینه تری این تابع را به صورت زیر بازنویسی کنیم:
 
+    public static void temp() {
+        int[] a = new int[10000 * 20000];
+        int index = 0;
+        for (int i = 0; i < 10000; i++) {
+            for (int j = i; j < 20000 + i; j++) {
+                a[index++] = j;
+            }
+        }
+    }
+
+
+همچنین تست پروفایلینگ انجام شده بر روی کد جدید به صورت زیر است:
+
+
+![image](https://github.com/user-attachments/assets/5eabb1a9-f639-4b59-8fae-0b38863892a1)
+![image](https://github.com/user-attachments/assets/dd7c41c3-c82f-47ac-8b9e-0ee7565d336f)
 
 ## بخش دوم: پروفایلینگ و بهینه‌سازی پروژه دلخواه
