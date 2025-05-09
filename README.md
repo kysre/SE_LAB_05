@@ -9,7 +9,9 @@ SUT Software Engineering assignment 05.
 
 
 ![image](https://github.com/user-attachments/assets/db941fd8-93fb-4930-920c-13a37c5eb9bd)
+
 ![image](https://github.com/user-attachments/assets/d90fbd9e-13a0-4550-b5c8-ba9b8ed68ec1)
+
 ![image](https://github.com/user-attachments/assets/49700e41-9481-43c4-9c7c-daf25a517de9)
 
 
@@ -31,6 +33,7 @@ SUT Software Engineering assignment 05.
 همچنین تست پروفایلینگ انجام شده بر روی کد جدید به صورت زیر است که بهبود چشمگیر مصرف منابع را نشان می‌دهد:
 
 ![image](https://github.com/user-attachments/assets/47a6d9ea-ae7a-445c-8804-0f15258d18d9)
+
 ![image](https://github.com/user-attachments/assets/19fc89c0-e765-4964-b4b4-f95f77e57b1c)
 
 
@@ -51,6 +54,49 @@ SUT Software Engineering assignment 05.
 
 
 ![image](https://github.com/user-attachments/assets/5eabb1a9-f639-4b59-8fae-0b38863892a1)
+
 ![image](https://github.com/user-attachments/assets/dd7c41c3-c82f-47ac-8b9e-0ee7565d336f)
 
 ## بخش دوم: پروفایلینگ و بهینه‌سازی پروژه دلخواه
+
+در این بخش ما الگوریتم پیاده‌سازی خود را اعداد کاتالان انتخاب کردیم. این اعداد به این صورت تعریف می‌شوند: اگر عبارت‌های پرانتز مجاز را به این صورت در نظر بگیریم که هر پرانتز باز یک پرانتز بسته درست مربوط به خودش داشته باشد، تعداد عبارات پرانتز مجاز که شامل n پرانتز راست و n پرانتز چپ است، برابر با n اُمین عدد کاتالان است. حال ما الگوریتم مربوط به محاسبه اعداد کاتالان را به دو حالت سریع و یک حالت بهینه‌ شده پیاده سازی کردیم. برای اجرا ما هر دو حالت پیاده‌سازی را در یک کلاس آورده ایم و هر بار یکی از توابع را برای محاسبه صدا زده ایم.
+در حالت اول از برنامه‌نویسی بازگشتی برای پیاده‌سازی این عدد استفاده کردیم که اوردر زمانی آن ۲ به توان n است و کد آن به صورت زیر است:
+
+
+    public static long catalanSlow(int n) { 
+        if (n <= 0) {
+            return 1;
+        }
+        long result = 0;
+        for (int i = 0; i < n; i++) {
+            result += catalanSlow(i) * catalanSlow(n - 1 - i);
+        }
+        return result;
+    }
+
+حال تست پروفایلینگ انجام شده بر روی این کد به صورت زیر است که برای n=22 اجرا شده است و حدود ۱۴ ثانیه اجرای آن طول کشید و مصرف منابع آن به صورت زیر است:
+
+![image](https://github.com/user-attachments/assets/aca89a42-557f-4cd5-92ce-fffd792e9369)
+
+![image](https://github.com/user-attachments/assets/182c7a0e-7b6c-4693-87ed-48e77af7a4f7)
+
+![image](https://github.com/user-attachments/assets/5cf82d38-8631-4c3e-90a9-1ac26e2ab15b)
+
+حال در حالت دوم پیاده سازی از برنامه‌نویسی دینامیک یا dynamic programing  استفاده کردیم و در اوردر زمانی n به توان ۲ اعداد کاتالان را محاسبه می‌کنیم که کد آن به صورت زیر است:
+
+
+
+    public static long catalanFast(int n) { // O(n^2)
+        long[] catalan = new long[n + 1];
+        catalan[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 0; j < i; j++) {
+                catalan[i] += catalan[j] * catalan[i - 1 - j];
+            }
+        }
+        return catalan[n];
+    }
+
+حال تست پروفایلینگ انجام شده بر روی این کد به صورت زیر است که مشاهده می‌کنیم برای همان n=22 در دقت کپچر برنامه عملا منابعی مصرف نمی‌کند:
+
+![image](https://github.com/user-attachments/assets/1231ebd5-47d9-4829-99f9-c3f6980b1e62)
