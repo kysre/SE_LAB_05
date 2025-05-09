@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/4881ea2b-a61b-4837-8334-2056979eb489)# SE_LAB_05
+# SE_LAB_05
 SUT Software Engineering assignment 05.
 
 # گزارش آزمایش پنجم آزمایشگاه نرم افزار(تست پروفایلینگ)
@@ -12,6 +12,24 @@ SUT Software Engineering assignment 05.
 ![image](https://github.com/user-attachments/assets/d90fbd9e-13a0-4550-b5c8-ba9b8ed68ec1)
 ![image](https://github.com/user-attachments/assets/49700e41-9481-43c4-9c7c-daf25a517de9)
 
+
+با توجه به این گزارشات پروفایلینگ این کلاس، تابع ()temp سربار پردازشی بسیار زیادی دارد و بیشترین منابع را مصرف می‌کند.
+حال به سراغ بررسی و اصلاح این تابع می‌رویم.  با بررسی این تابع متوجه می‌شویم که یکی از نکات اولیه‌ای که در پیاده‌سازی آن رعایت نشده است این است که ظرفیت کل ArrayList ما تعیین نشده است و هر بار با اد شدن یک المان دیگر طول آن تغییر می‌کند و هزینه محاسباتی بالا می‌رود. پس طول این ArrayList را به صورت مشخص می‌دهیم و همچنین با استفاده از انتقال اندیس حلقه اول به اندیس شروع حلقه‌ی دوم، انجام یک عملیات جمع صرفه‌جویی کردیم و تعداد قابل توجهی از اعداد تکراری ساخته شده را هم با بزرگتر کردن اندیس شروع حلقه دوم کم کردیم. قطعه کد اصلاح شده به صورت زیر است:
+
+    public static void temp() { 
+        ArrayList<Integer> a = new ArrayList<>(200000); 
+        for (int i = 0; i < 100; i++) { 
+            for (int j = 0; j < 200; j++) { 
+                a.add(i + j); 
+            } 
+        } 
+    }
+
+
+همچنین تست پروفایلینگ انجام شده بر روی کد جدید به صورت زیر است که بهبود چشمگیر مصرف منابع را نشان می‌دهد:
+
+![image](https://github.com/user-attachments/assets/47a6d9ea-ae7a-445c-8804-0f15258d18d9)
+![image](https://github.com/user-attachments/assets/19fc89c0-e765-4964-b4b4-f95f77e57b1c)
 
 
 
